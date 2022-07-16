@@ -1,0 +1,23 @@
+{
+  "name": "grapesjs-dynamic-components",
+  "version": "1.0.1",
+  "description": "Grapesjs Dynamic Components",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/documint-me/grapesjs-dynamic-components.git"
+  },
+  "scripts": {
+    "start": "grapesjs-cli serve",
+    "build": "grapesjs-cli build",
+    "bump": "npm version patch -m 'Bump v%s'"
+  },
+  "keywords": [
+    "grapesjs",
+    "plugin"
+  ],
+  "devDependencies": {
+    "grapesjs-cli": "^3.0.1"
+  },
+  "license": "MIT"
+}

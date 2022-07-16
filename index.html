@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Grapesjs Dynamic Components</title>
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/grapesjs"></script>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="gjs" style="height:0px; overflow:hidden">
+        <div style="margin:100px 100px 25px; padding:25px; font:caption">
+            This is a demo content from _index.html. You can use this template file for
+            development purpose. It won't be stored in your git repository
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        // Wait for the plugin to be injected by the dev server
+        setTimeout(() => {
+            window.editor = grapesjs.init({
+                height: '100%',
+                container: '#gjs',
+                showOffsets: true,
+                fromElement: true,
+                noticeOnUnload: false,
+                storageManager: false,
+                plugins: ['grapesjs-dynamic-components'],
+                pluginsOpts: {
+                    'grapesjs-dynamic-components': { /* Test here your options  */ }
+                }
+            });
+
+            const bm = editor.Blocks;
+            const domc = editor.Components;
+
+            domc.addType('cont', {
+                model: {
+                    defaults: {
+                        draggable: '[data-gjs-type="wrapper"]',
+                        attributes: { class: 'dep' },
+                        styles: `.dep{
+                            margin:10px 10px 10px 10px;
+                            padding:10px 10px 10px 10px;
+                            background-color:rgba(0,0,0,0.1);
+                        }`
+                    }
+                }
+            });
+
+            domc.addType('cont2', {
+                model: {
+                    defaults: {
+                        draggable: '[data-gjs-type="wrapper"]',
+                        attributes: { class: 'new' },
+                        styles: `.new{
+                            margin:10px 10px 10px 10px;
+                            padding:10px 10px 10px 10px;
+                            background-color:rgba(0,0,0,0.2);
+                        }`
+                    }
+                }
+            });
+
+            domc.addType('test', {
+                model: {
+                    defaults: {
+                        draggable: '[data-gjs-type="cont"]',
+                        content: '<p>Example deprecated</p>'
+                    }
+                }
+            });
+
+            domc.addType('test2', {
+                model: {
+                    defaults: {
+                        draggable: '[data-gjs-type="cont2"]',
+                        content: '<p>Example new</p>'
+                    }
+                }
+            });
+
+            bm.add('deprecated-section', {
+                label: 'Deprecated Section',
+                content: {
+                    type: 'cont',
+                    components: {
+                        type: 'test'
+                    }
+                }
+            });
+
+            bm.add('deprecated-content', {
+                label: 'Deprecated Content',
+                content: {
+                    type: 'test'
+                }
+            });
+
+            bm.add('new-section', {
+                label: 'New Section',
+                content: {
+                    type: 'cont2',
+                    components: {
+                        type: 'test2'
+                    }
+                }
+            });
+
+            bm.add('new-content', {
+                label: 'New Content',
+                content: {
+                    type: 'test2'
+                }
+            });
+
+            bm.add('dynamic-content', {
+                label: 'Dynamic Content',
+                content: {
+                    type: 'dynamic',
+                    switch: [{
+                            parents: ['cont'],
+                            type: 'test'
+                        },
+                        {
+                            parents: ['cont2'],
+                            type: 'test2'
+                        }
+                    ]
+                }
+            });
+        }, 100);
+    </script>
+</body>
+
+</html>
