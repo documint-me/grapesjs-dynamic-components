@@ -1,5 +1,5 @@
 {
-  "name": "grapesjs-dynamic-components",
+  "name": "@documint/grapesjs-dynamic-components",
   "version": "1.0.1",
   "description": "Grapesjs Dynamic Components",
   "main": "dist/index.js",
