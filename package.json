@@ -19,5 +19,8 @@
   "devDependencies": {
     "grapesjs-cli": "^3.0.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
