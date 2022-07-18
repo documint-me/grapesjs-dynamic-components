@@ -35,7 +35,7 @@
                 fromElement: true,
                 noticeOnUnload: false,
                 storageManager: false,
-                plugins: ['grapesjs-dynamic-components'],
+                plugins: ['@documint/grapesjs-dynamic-components'],
                 pluginsOpts: {
                     'grapesjs-dynamic-components': { /* Test here your options  */ }
                 }
@@ -68,6 +68,15 @@
                             padding:10px 10px 10px 10px;
                             background-color:rgba(0,0,0,0.2);
                         }`
+                    }
+                }
+            });
+
+            domc.addType('dynamic-content', {
+                extends: 'dynamic',
+                model: {
+                    defaults: {
+                        draggable: '[data-gjs-type="cont"], [data-gjs-type="cont2"]',
                     }
                 }
             });
@@ -127,7 +136,7 @@
             bm.add('dynamic-content', {
                 label: 'Dynamic Content',
                 content: {
-                    type: 'dynamic',
+                    type: 'dynamic-content',
                     switch: [{
                             parents: ['cont'],
                             type: 'test'

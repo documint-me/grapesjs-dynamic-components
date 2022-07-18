@@ -13,7 +13,8 @@ export default (editor, opts = {}) => {
   domc.addType(dynamicName, {
     model: {
       defaults: {
-        content: `${dynamicName}...`
+        content: `${dynamicName}...`,
+        dynamicName,
       },
       ...dynamicOpts
     }
@@ -21,13 +22,13 @@ export default (editor, opts = {}) => {
 
   editor.on('block:drag:stop', (component, block) => {
     const content = block.getContent();
-    if (content.type === dynamicName) {
+    if (component && content.switch) {
       const parent = component.parent().get('type');
       const swtchs = content.switch;
       swtchs.forEach((swtch) => {
         if (swtch.parents.includes(parent)) component.replaceWith({ type: swtch.type });
       });
-      if (component.get('type') === dynamicName) component.remove();
+      if (component.get('dynamicName') === dynamicName) component.remove();
     }
   });
 };
